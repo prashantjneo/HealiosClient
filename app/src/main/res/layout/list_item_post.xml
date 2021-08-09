@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.healios.io.assignment.database.posts.LocalPost" />
+
+        <variable
+            name="clickListener"
+            type="com.healios.io.assignment.ui.homefragment.adapter.PostAdapter.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:clickable="true"
+            android:elevation="@dimen/margin_5"
+            android:focusable="true"
+            android:onClick="@{() -> clickListener.onPostClick(data)}"
+            app:cardBackgroundColor="@color/colorCardTransparent"
+            app:cardCornerRadius="@dimen/margin_10"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_10"
+                    android:text="@string/title"
+                    android:theme="@style/TextAppearance.MyApp.Headline5"
+                    app:layout_constraintEnd_toStartOf="@+id/tvTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/tvBodyLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10"
+
+                    android:text="@{data.title}"
+                    android:theme="@style/TextAppearance.MyApp.Headline5"
+                    app:layout_constraintBottom_toBottomOf="@id/tvTitleLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvTitleLabel"
+                    app:layout_constraintTop_toTopOf="@+id/tvTitleLabel" />
+
+
+                <TextView
+                    android:id="@+id/tvBodyLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginEnd="@dimen/margin_10"
+                    android:text="@string/body"
+                    android:theme="@style/TextAppearance.MyApp.Headline4"
+                    app:layout_constraintEnd_toStartOf="@+id/tvBody"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitleLabel" />
+
+                <TextView
+                    android:id="@+id/tvBody"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10"
+
+                    android:layout_marginEnd="@dimen/margin_10"
+                    android:text="@{data.body}"
+                    android:theme="@style/TextAppearance.MyApp.Headline4"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvBodyLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvBodyLabel"
+                    app:layout_constraintTop_toTopOf="@id/tvBodyLabel" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
