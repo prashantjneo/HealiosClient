@@ -8,5 +8,4 @@ data class RemotePostComments(
     @SerializedName("id") @Expose val id: Int?,
     @SerializedName("name") @Expose val name: String?,
     @SerializedName("email") @Expose val email: String?,
-    @SerializedName("body") @Expose val body: String?,
-)
+    @SerializedName("body") @Expose val body: String?, )

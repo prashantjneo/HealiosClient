@@ -2,15 +2,14 @@ package com.healios.io.assignment.ui.homefragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.healios.io.assignment.database.posts.LocalPost
 import com.healios.io.assignment.databinding.ListItemPostBinding
 
-class PostAdapter(val listener:OnClickListener,var postList: List<LocalPost>) :
+class PostAdapter(val listener: OnClickListener, var postList: List<LocalPost>) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
-     var postListOne: List<LocalPost> = arrayListOf()
+    var postListOne: List<LocalPost> = arrayListOf()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -23,14 +22,14 @@ class PostAdapter(val listener:OnClickListener,var postList: List<LocalPost>) :
         )
     }
 
-   public fun setData(listPost:List<LocalPost>){
+    fun setData(listPost: List<LocalPost>) {
 
 
-   }
+    }
 
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.bind(postList[position],listener)
+        holder.bind(postList[position], listener)
     }
 
     override fun getItemCount(): Int {
@@ -40,8 +39,7 @@ class PostAdapter(val listener:OnClickListener,var postList: List<LocalPost>) :
     class PostViewHolder(private var binding: ListItemPostBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-
-        fun bind(item: LocalPost?,listener: OnClickListener) {
+        fun bind(item: LocalPost?, listener: OnClickListener) {
 
             binding.run {
                 data = item
@@ -50,7 +48,6 @@ class PostAdapter(val listener:OnClickListener,var postList: List<LocalPost>) :
             }
         }
     }
-
 
     interface OnClickListener {
 

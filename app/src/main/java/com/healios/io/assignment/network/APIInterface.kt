@@ -10,15 +10,14 @@ import retrofit2.http.GET
 interface APIInterface {
 
     @GET(Constants.GET_POSTS)
-    fun getAllPosts(
-    ): Deferred<ArrayList<RemotePosts>>
+    fun getAllPosts(): Deferred<ArrayList<RemotePosts>>
 
 
     @GET(Constants.GET_USER_DETAILS)
-    fun getUserDetails():Deferred<ArrayList<RemoteUserDetails>>
+    fun getUserDetails(): Deferred<ArrayList<RemoteUserDetails>>
 
 
     @GET(Constants.GET_POST_COMMENT)
-    fun  getPostComments():Deferred<ArrayList<RemotePostComments>>
+    fun getPostComments(): Deferred<ArrayList<RemotePostComments>>
 
 }

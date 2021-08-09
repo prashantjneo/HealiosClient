@@ -21,7 +21,6 @@ object UserDetail {
 
     val localUserDetailDatabase = AppDatabase.getInstance(HealiosApp.instance).localUserDetails
     val localUserPostCommentDatabase = AppDatabase.getInstance(HealiosApp.instance).localPostComment
-    val localUserPostDatabase = AppDatabase.getInstance(HealiosApp.instance).localPostDao
 
     suspend fun getRemoteUserDetails() {
         withContext(Dispatchers.Main) {
@@ -34,10 +33,6 @@ object UserDetail {
         }
     }
 
-
-
-
-
     suspend fun saveUserDetailsIntoDatabase(result: ArrayList<RemoteUserDetails>) {
         var listLocalUser: ArrayList<LocalUserDetails> = ArrayList()
         listLocalUser.clear()
@@ -45,9 +40,7 @@ object UserDetail {
         withContext(Dispatchers.IO) {
             for (item in result) {
                 val localDetails = LocalUserDetails(
-                    0, item.id, item.name, item.username, item.email,
-                    item.phone, item.website
-                )
+                    0, item.id, item.name, item.username, item.email, item.phone, item.website)
                 listLocalUser.add(localDetails)
             }
             localUserDetailDatabase.saveUserDetails(listLocalUser)

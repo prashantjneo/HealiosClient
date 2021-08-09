@@ -5,8 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.healios.io.assignment.database.comment.LocalPostComment
-import com.healios.io.assignment.database.user_details.LocalUserDetails
 
 @Dao
 interface LocalPostCommentDao {
@@ -18,5 +16,5 @@ interface LocalPostCommentDao {
     fun saveAllPostsComment(localPost: List<LocalPostComment>)
 
     @Query("SELECT * FROM local_post_comment WHERE PostID=:postID")
-    fun getSelectedPostComment(postID: Int): List< LocalPostComment>
+    fun getSelectedPostComment(postID: Int): List<LocalPostComment>
 }

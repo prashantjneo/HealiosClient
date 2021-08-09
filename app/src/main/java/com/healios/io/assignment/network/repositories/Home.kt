@@ -37,9 +37,7 @@ object Home {
         listLocalPost.clear()
         withContext(Dispatchers.IO) {
             for (item in result) {
-                val localPost = LocalPost(
-                    0, item.userId, item.id, item.title, item.body
-                )
+                val localPost = LocalPost(0, item.userId, item.id, item.title, item.body)
                 listLocalPost.add(localPost)
             }
             database.saveAllPosts(listLocalPost)
@@ -49,13 +47,11 @@ object Home {
 
     suspend fun getRemotePostComments(
         success: (ArrayList<RemotePostComments>) -> Unit,
-        error: (Exception) -> Unit
-    ) {
+        error: (Exception) -> Unit) {
 
         withContext(Dispatchers.IO) {
             try {
                 val result = mServices.getPostComments().await()
-
                 success(result)
                 savePostCommentIntoDatabase(result)
             } catch (e: Exception) {
@@ -73,9 +69,7 @@ object Home {
 
         withContext(Dispatchers.IO) {
             for (item in result) {
-                val localPostComment = LocalPostComment(
-                    0, item.postId, item.id, item.name, item.email, item.body
-                )
+                val localPostComment = LocalPostComment(0, item.postId, item.id, item.name, item.email, item.body)
                 listLocalPostComments.add(localPostComment)
             }
             UserDetail.localUserPostCommentDatabase.saveAllPostsComment(listLocalPostComments)

@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.healios.io.assignment.database.user_details.LocalUserDetails
 
 
 @Dao
@@ -18,5 +17,5 @@ interface LocalPostDao {
     fun saveAllPosts(localPost: List<LocalPost>)
 
     @Query("SELECT * FROM local_post_table WHERE UserId=:userId")
-     fun getUserSelectedPost(userId: Int): List<LocalPost>
+    fun getUserSelectedPost(userId: Int): List<LocalPost>
 }

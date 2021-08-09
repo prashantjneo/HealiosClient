@@ -75,7 +75,7 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding, UserDetailV
             mBinding.progressbar.visibility = View.GONE
 
             if (it != null && it.size != 0) {
-                showMessage("total comment" + it.size)
+               // showMessage("total comment" + it.size)
 
                 if(it.isNotEmpty()){
                     var comments: String = ""

@@ -8,7 +8,4 @@ data class RemoteUserAddress(
     @SerializedName("suite") @Expose val suite: String?,
     @SerializedName("city") @Expose val city: String?,
     @SerializedName("zipcode") @Expose val zipcode: String?,
-    @SerializedName("geo") @Expose val geo: RemoteUserGeoCordinate?,
-
-
-    )
+    @SerializedName("geo") @Expose val geo: RemoteUserGeoCordinate?, )

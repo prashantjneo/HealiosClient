@@ -12,6 +12,4 @@ data class RemoteUserDetails(
     @SerializedName("address") @Expose val address: RemoteUserAddress?,
     @SerializedName("phone") @Expose val phone: String?,
     @SerializedName("website") @Expose val website: String?,
-    @SerializedName("company") @Expose val company: RemoteUserCompanyDetails?,
-
-    )
+    @SerializedName("company") @Expose val company: RemoteUserCompanyDetails?, )

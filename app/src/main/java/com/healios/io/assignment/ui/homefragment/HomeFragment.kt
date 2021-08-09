@@ -48,12 +48,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         mAdapter = PostAdapter(object : PostAdapter.OnClickListener {
             override fun onPostClick(data: LocalPost) {
-
                 replaceFragment(
                     fragment = UserDetailsFragment.newInstance(
                         data.UserId!!, data.Id!!, data.Title!!, data.Body!!
-                    ), addToBackStack = true, bundle = null
-                )
+                    ), addToBackStack = true, bundle = null)
             }
 
         }, list)

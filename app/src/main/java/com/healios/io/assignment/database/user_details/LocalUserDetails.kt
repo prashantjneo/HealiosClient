@@ -20,7 +20,6 @@ data class LocalUserDetails(
     val username: String?,
 
 
-
     @ColumnInfo(name = "email")
     val email: String?,
 

@@ -27,9 +27,6 @@ class UserDetailViewModel(application: Application) : BaseViewModel(application)
         }
     }
 
-
-
-
     fun getSelectedUserFromLocal(userId: Int) {
         coroutineScope.launch {
             _getLocalUserDetails.value = UserDetail.getSelectedUser(userId)
@@ -37,9 +34,8 @@ class UserDetailViewModel(application: Application) : BaseViewModel(application)
     }
 
     fun getSelectedUserPostComment(pID: Int) {
-
         coroutineScope.launch {
-            _getLocalPostComment.value= UserDetail.getSelectedUserComment(pID)
+            _getLocalPostComment.value = UserDetail.getSelectedUserComment(pID)
         }
     }
 }

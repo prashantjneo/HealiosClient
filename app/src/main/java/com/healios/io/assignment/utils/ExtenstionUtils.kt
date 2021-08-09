@@ -8,13 +8,6 @@ import com.healios.io.assignment.app_base_component.BaseActivity
 
 var toast: Toast? = null
 
-fun Activity.showMessage(message: String, lengthLong: Boolean = false) {
-    if (toast != null) {
-        toast?.cancel()
-    }
-    toast = Toast.makeText(this, message, if (lengthLong) Toast.LENGTH_LONG else Toast.LENGTH_SHORT)
-    toast?.show()
-}
 
 fun Fragment.showMessage(message: String?, lengthLong: Boolean = false) {
     if (toast != null) {

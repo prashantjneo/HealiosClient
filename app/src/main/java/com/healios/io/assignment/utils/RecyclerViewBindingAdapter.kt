@@ -7,10 +7,9 @@ import com.healios.io.assignment.ui.homefragment.adapter.PostAdapter
 
 
 @BindingAdapter("listPost")
-fun bindingPostList(recyclerView: RecyclerView,data:List<LocalPost>?){
+fun bindingPostList(recyclerView: RecyclerView, data: List<LocalPost>?) {
     if (data != null) {
-        val adapter= recyclerView.adapter as PostAdapter
-        adapter.postListOne=data
-       // adapter.setData(data)
+        val adapter = recyclerView.adapter as PostAdapter
+        adapter.postListOne = data
     }
 }

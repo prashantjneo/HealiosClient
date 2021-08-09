@@ -17,5 +17,5 @@ interface LocalUserDao {
 
 
     @Query("SELECT * FROM local_user_details WHERE id=:userId")
-     fun getSelectedUser(userId: Int):LocalUserDetails
+    fun getSelectedUser(userId: Int): LocalUserDetails
 }

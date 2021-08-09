@@ -5,5 +5,4 @@ import com.google.gson.annotations.SerializedName
 
 data class RemoteUserGeoCordinate(
     @SerializedName("lat") @Expose val lat: String?,
-    @SerializedName("lng") @Expose val lng: String?,
-)
+    @SerializedName("lng") @Expose val lng: String?, )
