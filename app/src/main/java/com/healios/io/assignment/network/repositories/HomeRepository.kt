@@ -1,29 +1,27 @@
 package com.healios.io.assignment.network.repositories
 
 import androidx.lifecycle.LiveData
-import com.healios.io.assignment.app_base_component.HealiosApp
-import com.healios.io.assignment.database.AppDatabase
 import com.healios.io.assignment.database.comment.LocalPostComment
+import com.healios.io.assignment.database.comment.LocalPostCommentDao
 import com.healios.io.assignment.database.posts.LocalPost
+import com.healios.io.assignment.database.posts.LocalPostDao
 import com.healios.io.assignment.network.APIInterface
-import com.healios.io.assignment.network.APINetwork
 import com.healios.io.assignment.network.response.RemotePostComments
 import com.healios.io.assignment.network.response.RemotePosts
-import com.healios.io.assignment.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-object Home {
-    private val mServices: APIInterface by lazy {
-        APINetwork.getClient(Constants.BASE_URL).create(APIInterface::class.java)
-    }
-
-    val database = AppDatabase.getInstance(HealiosApp.instance).localPostDao
+class HomeRepository @Inject constructor(
+    private val remoteDataSource: APIInterface,
+    private  val localPostDao:LocalPostDao,
+    private  val localPostCommentDao: LocalPostCommentDao
+) {
 
     suspend fun getRemotePost() {
-        withContext(Dispatchers.Main) {
+        withContext(Dispatchers.IO) {
             try {
-                val result = mServices.getAllPosts().await()
+                val result = remoteDataSource.getAllPosts().await()
                 savePostsIntoLocalDatabase(result)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -40,7 +38,7 @@ object Home {
                 val localPost = LocalPost(0, item.userId, item.id, item.title, item.body)
                 listLocalPost.add(localPost)
             }
-            database.saveAllPosts(listLocalPost)
+            localPostDao.saveAllPosts(listLocalPost)
         }
     }
 
@@ -51,7 +49,7 @@ object Home {
 
         withContext(Dispatchers.IO) {
             try {
-                val result = mServices.getPostComments().await()
+                val result = remoteDataSource.getPostComments().await()
                 success(result)
                 savePostCommentIntoDatabase(result)
             } catch (e: Exception) {
@@ -72,14 +70,14 @@ object Home {
                 val localPostComment = LocalPostComment(0, item.postId, item.id, item.name, item.email, item.body)
                 listLocalPostComments.add(localPostComment)
             }
-            UserDetail.localUserPostCommentDatabase.saveAllPostsComment(listLocalPostComments)
+            localPostCommentDao.saveAllPostsComment(listLocalPostComments)
 
         }
 
     }
 
     fun getPostsFromDatabase(): LiveData<List<LocalPost>> {
-        return database.getAllLocalPost()
+        return localPostDao.getAllLocalPost()
     }
 
 }

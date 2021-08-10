@@ -9,7 +9,7 @@
             name="viewModel"
             type="com.healios.io.assignment.ui.homefragment.HomeViewModel" />
 
-        </data>
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,18 +17,17 @@
         tools:context=".ui.homefragment.HomeFragment">
 
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPostList"
-            android:visibility="visible"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:listPost="@{viewModel.getLocalPostResponse}"
-            tools:listitem="@layout/list_item_post"/>
+            tools:listitem="@layout/list_item_post" />
 
 
         <ProgressBar

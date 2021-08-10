@@ -6,20 +6,19 @@ import android.os.Looper
 import com.healios.io.assignment.app_base_component.BaseActivity
 import com.healios.io.assignment.databinding.ActivitySplashBinding
 import com.healios.io.assignment.ui.HomeActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
+class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
-class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     private val SPLASH_TIME_OUT: Long = 2000
 
     override fun getLayoutId() = R.layout.activity_splash
-
-    override fun getViewModel() = SplashViewModel::class.java
 
     override fun onBinding() {
         Handler(Looper.getMainLooper()).postDelayed({
             goToHomeActivity()
         }, SPLASH_TIME_OUT)
-
     }
 
     private fun goToHomeActivity() {

@@ -8,9 +8,7 @@ import com.healios.io.assignment.databinding.ListItemPostBinding
 
 class PostAdapter(val listener: OnClickListener, var postList: List<LocalPost>) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
-
     var postListOne: List<LocalPost> = arrayListOf()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         return PostViewHolder(
@@ -21,12 +19,6 @@ class PostAdapter(val listener: OnClickListener, var postList: List<LocalPost>) 
             )
         )
     }
-
-    fun setData(listPost: List<LocalPost>) {
-
-
-    }
-
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(postList[position], listener)
@@ -40,7 +32,6 @@ class PostAdapter(val listener: OnClickListener, var postList: List<LocalPost>) 
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: LocalPost?, listener: OnClickListener) {
-
             binding.run {
                 data = item
                 clickListener = listener
@@ -50,7 +41,6 @@ class PostAdapter(val listener: OnClickListener, var postList: List<LocalPost>) 
     }
 
     interface OnClickListener {
-
         fun onPostClick(data: LocalPost)
     }
 

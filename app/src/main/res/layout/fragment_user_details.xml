@@ -96,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_10"
                 android:gravity="center"
+                android:paddingBottom="@dimen/margin_10"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@id/tvPostTitle" />
@@ -124,7 +125,6 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvComment"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvComment" />
 
 

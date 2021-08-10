@@ -1,15 +1,18 @@
 package com.healios.io.assignment.ui.user_detail_fragment
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.healios.io.assignment.app_base_component.BaseViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.healios.io.assignment.database.comment.LocalPostComment
 import com.healios.io.assignment.database.user_details.LocalUserDetails
-import com.healios.io.assignment.network.repositories.UserDetail
+import com.healios.io.assignment.network.repositories.UserDetailRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UserDetailViewModel(application: Application) : BaseViewModel(application) {
+@HiltViewModel
+class UserDetailViewModel @Inject constructor(private  val repository: UserDetailRepository) :ViewModel(){
 
 
     private val _getLocalUserDetails = MutableLiveData<LocalUserDetails>()
@@ -22,20 +25,20 @@ class UserDetailViewModel(application: Application) : BaseViewModel(application)
 
 
     fun callRemoteUserDetails() {
-        coroutineScope.launch {
-            UserDetail.getRemoteUserDetails()
+        viewModelScope.launch {
+            repository.getRemoteUserDetails()
         }
     }
 
     fun getSelectedUserFromLocal(userId: Int) {
-        coroutineScope.launch {
-            _getLocalUserDetails.value = UserDetail.getSelectedUser(userId)
+        viewModelScope.launch {
+            _getLocalUserDetails.value = repository.getSelectedUser(userId)
         }
     }
 
     fun getSelectedUserPostComment(pID: Int) {
-        coroutineScope.launch {
-            _getLocalPostComment.value = UserDetail.getSelectedUserComment(pID)
+        viewModelScope.launch {
+            _getLocalPostComment.value = repository.getSelectedUserComment(pID)
         }
     }
 }

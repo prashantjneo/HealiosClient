@@ -7,13 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 
-abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(), UICallbacks<V> {
-
-
-    protected lateinit var mBinding: T
-    protected lateinit var mViewModel: V
+abstract class BaseFragment <V: ViewDataBinding>:Fragment(),UICallbacks {
+    protected lateinit var mBinding: V
 
 
     override fun onCreateView(
@@ -23,8 +19,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     ): View? {
 
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        mViewModel = ViewModelProvider(this@BaseFragment).get(getViewModel())
-
         return mBinding.root
     }
 

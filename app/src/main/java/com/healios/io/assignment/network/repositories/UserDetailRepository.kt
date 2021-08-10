@@ -1,31 +1,25 @@
 package com.healios.io.assignment.network.repositories
 
-import androidx.lifecycle.LiveData
-import com.healios.io.assignment.app_base_component.HealiosApp
-import com.healios.io.assignment.database.AppDatabase
 import com.healios.io.assignment.database.comment.LocalPostComment
-import com.healios.io.assignment.database.posts.LocalPost
+import com.healios.io.assignment.database.comment.LocalPostCommentDao
+import com.healios.io.assignment.database.user_details.LocalUserDao
 import com.healios.io.assignment.database.user_details.LocalUserDetails
 import com.healios.io.assignment.network.APIInterface
-import com.healios.io.assignment.network.APINetwork
-import com.healios.io.assignment.network.response.RemotePostComments
 import com.healios.io.assignment.network.response.user_details.RemoteUserDetails
-import com.healios.io.assignment.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-object UserDetail {
-    private val mServices: APIInterface by lazy {
-        APINetwork.getClient(Constants.BASE_URL).create(APIInterface::class.java)
-    }
-
-    val localUserDetailDatabase = AppDatabase.getInstance(HealiosApp.instance).localUserDetails
-    val localUserPostCommentDatabase = AppDatabase.getInstance(HealiosApp.instance).localPostComment
+class UserDetailRepository @Inject constructor(
+    private val remoteDataSource: APIInterface,
+    private  val localUserDao: LocalUserDao,
+    private  val localPostCommentDao: LocalPostCommentDao
+) {
 
     suspend fun getRemoteUserDetails() {
-        withContext(Dispatchers.Main) {
+        withContext(Dispatchers.IO) {
             try {
-                val result = mServices.getUserDetails().await()
+                val result = remoteDataSource.getUserDetails().await()
                 saveUserDetailsIntoDatabase(result)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -43,17 +37,16 @@ object UserDetail {
                     0, item.id, item.name, item.username, item.email, item.phone, item.website)
                 listLocalUser.add(localDetails)
             }
-            localUserDetailDatabase.saveUserDetails(listLocalUser)
+            localUserDao.saveUserDetails(listLocalUser)
         }
     }
 
     suspend fun getSelectedUser(userId: Int): LocalUserDetails {
 
         var localUserDetails: LocalUserDetails
-
         withContext(Dispatchers.IO) {
 
-            localUserDetails = localUserDetailDatabase.getSelectedUser(userId)
+            localUserDetails = localUserDao.getSelectedUser(userId)
         }
         return localUserDetails
 
@@ -65,9 +58,10 @@ object UserDetail {
         var localPostComment:List<LocalPostComment>
 
         withContext(Dispatchers.IO){
-            localPostComment = localUserPostCommentDatabase.getSelectedPostComment(postId)
+            localPostComment = localPostCommentDao.getSelectedPostComment(postId)
         }
-
         return  localPostComment
     }
+
+
 }

@@ -7,14 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
 import com.healios.io.assignment.R
 
-abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatActivity(),
-    UICallbacks<V> {
+abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
+    UICallbacks {
 
     protected lateinit var mBinding: T
-    protected lateinit var mViewModel: V
     protected lateinit var mContext: Context
 
     protected lateinit var mManager: FragmentManager
@@ -24,7 +22,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this@BaseActivity, getLayoutId())
-        mViewModel = ViewModelProvider(this@BaseActivity).get(getViewModel())
         mManager = supportFragmentManager
         mContext = this@BaseActivity
         onBinding()
